@@ -6,7 +6,7 @@
     <artifactId>AAAR-Alfresco-CE-v5.2-Repository</artifactId>
     <version>4.5</version>
     <name>AAAR-Alfresco-CE-v5.2-Repository Repository AMP project</name>
-    <packaging>amp</packaging>
+    <packaging>jar</packaging>
     <description>Manages the lifecycle of the A.A.A.R. addon repository AMP (Alfresco Module Package) for Alfresco CE v5.2.x.</description>
 
     <parent>
@@ -15,7 +15,7 @@
         <version>2.2.0</version>
     </parent>
 
-    <!-- 
+    <!--
         SDK properties have sensible defaults in the SDK parent,
         but you can override the properties below to use another version.
         For more available properties see the alfresco-sdk-parent POM.
@@ -37,7 +37,7 @@
         -->
     </properties>
 
-    <!-- Here we realize the connection with the Alfresco selected platform 
+    <!-- Here we realize the connection with the Alfresco selected platform
         (e.g.version and edition) -->
     <dependencyManagement>
         <dependencies>
@@ -99,4 +99,12 @@
             </dependencies>
         </profile>
     </profiles>
+    <build>
+      <resources>
+        <resource>
+            <directory>src/main/amp/config</directory>
+            <filtering>true</filtering>
+        </resource>
+     </resources>
+    </build>
 </project>

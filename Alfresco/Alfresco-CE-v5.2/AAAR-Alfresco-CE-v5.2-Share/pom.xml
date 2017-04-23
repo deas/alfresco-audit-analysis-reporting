@@ -6,7 +6,7 @@
     <artifactId>AAAR-Alfresco-CE-v5.2-Share</artifactId>
     <version>4.5</version>
     <name>AAAR-Alfresco-CE-v5.2-Share AMP project</name>
-    <packaging>amp</packaging>
+    <packaging>jar</packaging>
     <description>Manages the lifecycle of the A.A.A.R. Addon Share AMP (Alfresco Module Package) for Alfresco CE v5.2.x.</description>
 
     <parent>
@@ -15,7 +15,7 @@
         <version>2.2.0</version>
     </parent>
 
-    <!-- 
+    <!--
         SDK properties have sensible defaults in the SDK parent,
         but you can override the properties below to use another version.
         For more available properties see the alfresco-sdk-parent POM.
@@ -46,13 +46,13 @@
 
     </properties>
 
-    <!-- Here we realize the connection with the Alfresco selected platform 
+    <!-- Here we realize the connection with the Alfresco selected platform
         (e.g.version and edition) -->
     <dependencyManagement>
         <dependencies>
             <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco version/edition
-                (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) 
-                NOTE: You still need to define dependencies in your POM, but you can omit version as it's enforced by this dependencyManagement. NOTE: It defaults 
+                (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies)
+                NOTE: You still need to define dependencies in your POM, but you can omit version as it's enforced by this dependencyManagement. NOTE: It defaults
                 to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom -->
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
@@ -88,6 +88,37 @@
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
             </plugin>
+        <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <escapeString>\</escapeString>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/META-INF/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/amp/web</directory>
+                                    <!--filtering>true</filtering-->
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+      <resources>
+        <resource>
+            <directory>src/main/amp/config</directory>
+            <filtering>false</filtering>
+        </resource>
+     </resources>
     </build>
 </project>
